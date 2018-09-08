@@ -5,13 +5,50 @@ const users_model_1 = require("./users.model");
 class UsersRouter extends router_1.Router {
     applyRoutes(application) {
         application.get('/users', (req, resp, next) => {
-            users_model_1.Users.findAll().then(users => {
+            users_model_1.User.find().then(users => {
                 resp.json(users);
                 return next;
             });
         });
+        //retorna documento
         application.get('/users/:id', (req, resp, next) => {
-            users_model_1.Users.findById(req.params.id).then(user => {
+            users_model_1.User.findById(req.params.id).then(user => {
+                if (user) {
+                    resp.json(user);
+                    return next();
+                }
+                resp.send(404);
+                return next();
+            });
+        });
+        //insere documento
+        application.post('/users', (req, resp, next) => {
+            let user = new users_model_1.User(req.body);
+            user.save().then(user => {
+                user.password = undefined;
+                resp.json(user);
+                return next();
+            });
+        });
+        //atualiza documento
+        application.put('/users/:id', (req, resp, next) => {
+            const options = { overwrite: true }; //para reescrever todo o arquivo
+            users_model_1.User.update({ _id: req.params.id }, req.body, options)
+                .exec().then(result => {
+                if (result.n) {
+                    return users_model_1.User.findById(req.params.id);
+                }
+                else {
+                    resp.send(404);
+                }
+            }).then(user => {
+                resp.json(user);
+                return next();
+            });
+        });
+        application.patch('/users/:id', (req, resp, next) => {
+            const options = { new: true };
+            users_model_1.User.findByIdAndUpdate(req.params.id, req.body, options).then(user => {
                 if (user) {
                     resp.json(user);
                     return next();
