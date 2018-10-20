@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Tino/.idea/Tino.iml" filepath="$PROJECT_DIR$/../Tino/.idea/Tino.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Tino/.idea/Tino.iml" filepath="$PROJECT_DIR$/../Tino/.idea/Tino.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/meat-api.iml" filepath="$PROJECT_DIR$/.idea/meat-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../tino/.idea/tino.iml" filepath="$PROJECT_DIR$/../tino/.idea/tino.iml" />
     </modules>
   </component>
 </project>
